@@ -1,0 +1,31 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use App\Models\Reservation;
+
+class ReservationSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run()
+    {
+        $reservations = [
+            [
+                'user_id' => 1, 
+                'event_id' => 1,
+            ],
+            // [
+            //     'user_id' => 2, 
+            //     'event_id' => 2, 
+            // ],
+        ];
+
+        foreach ($reservations as $reservationData) {
+            Reservation::create($reservationData);
+        }
+}
+}

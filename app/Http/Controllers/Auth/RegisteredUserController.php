@@ -39,13 +39,12 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'user_type' => ['required'],
-            'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Corrected to 'profile_picture'
+            'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ]);
         
-        // Store profile image with original name
         if ($request->hasFile('profile_picture')) { 
             $profilePicture = $request->file('profile_picture');
-            $imageName = $profilePicture->getClientOriginalName(); // Get the original name of the image
+            $imageName = $profilePicture->getClientOriginalName(); 
             $imagePath = $profilePicture->storeAs('profile_pictures', $imageName);
         } else {
             $imagePath = null;
@@ -66,10 +65,13 @@ class RegisteredUserController extends Controller
         if ($request->user_type == 1) {
             return redirect(RouteServiceProvider::HOME);
         } else {
-            // return redirect()->route('doctors.show', ['id' => $user->id]);
+            return redirect()->route('admin.clients');
             return true;
         }
     }
     
     
+
+
+
 }

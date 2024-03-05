@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="../css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 
-	<title>AdminHub</title>
+	<title>Evento</title>
 </head>
 <body>
 
@@ -21,16 +21,16 @@
 	<section id="sidebar">
 		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
-			<span class="text">HealthCare</span>
+			<span class="text">Evento</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
-				<a href="#">
+				<a href="{{route('admin.index')}}">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
+            <li>
 				<a href="{{route("admin.events")}}">
 					<i class='bx bxs-doughnut-chart' ></i>
 					<span class="text">Events</span>
@@ -45,9 +45,9 @@
 			
 			
 			<li>
-				<a href="#">
+				<a href="{{route('admin.reservations')}}">
 					<i class='bx bxs-group' ></i>
-					<span class="text">Team</span>
+					<span class="text">Reservations</span>
 				</a>
 			</li>
 		</ul>
@@ -59,16 +59,10 @@
 				</a>
 			</li>
 			<li>
-				<form id="logoutForm" method="POST" action="{{ route('logout') }}">
-					@csrf
-				</form>
-				
-				<a href="#" class="logout" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
-					<i class='bx bxs-log-out-circle'></i>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
-				
-				
 			</li>
 		</ul>
 	</section>

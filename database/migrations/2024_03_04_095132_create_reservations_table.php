@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
            $table->foreignId('user_id')->constrained();
            $table->foreignId('event_id')->constrained();
-
+           $table->boolean('validated')->nullable();
             $table->timestamps();
         });
         

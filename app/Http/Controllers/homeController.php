@@ -2,40 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Category;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Event;
 
-class AdminController extends Controller
+use Illuminate\Http\Request;
+
+class homeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {      
-
-        $clients=User::all()->where('user_type',1);
-        $categories=Category::all();
-        $categoriesNumber=Category::count();
-        $clientsNumber = User::where('user_type', 1)->count();
-        $organizersNumber = User::where('user_type', 2)->count();
-        $organizers=User::all()->where('user_type',2);
-        $clients=User::all()->where('user_type',2);
-
-        // $doctor = Auth::user();
-
-        return view('admin.index', compact('clients', 'categories', 'organizersNumber','clientsNumber','categoriesNumber','organizers'));
-
-    }
-    public function  getClients()
+    public function filter(Request $request)
     {
-        $clients=User::all()->where('user_type',1);
-           $admin=Auth::user();
-
-        return view('admin.clients', compact('clients','admin'));
-
+        $categories = Category::all();
+        $categoryId = $request->input('category');
+        $title = $request->input('title');
+    
+        $eventsQuery = Event::query();
+    
+        if ($categoryId !== 'All') {
+            $eventsQuery->where('category_id', $categoryId);
+        }
+    
+        if (!empty($title)) {
+            $eventsQuery->where('title', 'like', '%' . $title . '%');
+        }
+    
+        $events = $eventsQuery->get();
+    
+        return view('welcome', compact('categories', 'events'));
     }
+    
     /**
      * Show the form for creating a new resource.
      */

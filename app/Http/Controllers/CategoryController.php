@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category; // Import the Category model at the top
+use App\Models\Category; 
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,8 @@ class CategoryController extends Controller
     {
         //
     }
-
+   
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -27,11 +29,9 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
+        $validatedData = $request->validated();
 
         $category = Category::create($validatedData);
 
@@ -58,16 +58,15 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
+        $validatedData = $request->validated(); 
     
         $category->update($validatedData);
     
         return redirect()->route('admin.index')->with('success', 'Category updated successfully.');
     }
+    
     
 
     /**

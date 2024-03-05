@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Http\Requests\EventRequest;
 
 class EventController extends Controller
 {
@@ -16,6 +17,7 @@ class EventController extends Controller
     
     return view('admin.events',compact('events'));
 }
+
 
     /**
      * Show the form for creating a new resource.
@@ -40,6 +42,7 @@ class EventController extends Controller
     {
         //
     }
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -52,14 +55,11 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
-    {
-        //
-    }
-    public function approve(Event $event)
+   
+    public function update(EventRequest $request,Event $event)
     {
         $event->update(['approved' => true]);
-    
+
         return back()->with('success', 'Event approved successfully.');
     }
     

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use App\Http\Requests\ReservationRequest;
 
 class ReservationController extends Controller
 {
@@ -12,7 +13,9 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = Reservation::all();
+
+        return view('admin.reservations', compact('reservations'));
     }
 
     /**
@@ -34,10 +37,16 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Reservation $reservation)
+    public function update(ReservationRequest $request, Reservation $reservation)
     {
-        //
+    dd($request);
+        $reservation->update(['validated' => !$reservation->validated]);
+    
+        return back()->with('success', 'Registration validated successfully.');
     }
+    
+
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -50,10 +59,7 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reservation $reservation)
-    {
-        //
-    }
+   
 
     /**
      * Remove the specified resource from storage.

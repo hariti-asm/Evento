@@ -20,7 +20,6 @@ return new class extends Migration
             $table->enum('user_type', [1, 2, 3])->nullable();
             $table->string('image')->nullable();
             $table->boolean('banned')->nullable();
-
             $table->rememberToken();
             $table->timestamps();
         });

@@ -114,40 +114,41 @@
             <i class='bx bx-search'></i>
             <i class='bx bx-filter'></i>
         </div>
-		<table>
-			<thead>
-				<tr>
-					<th>client</th>
-					<th>Email</th>
-					<th>Action</th> <!-- New column for Block/Deblock action -->
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($clients as $client)
-				<tr>
-					<td>
-						<img src="../{{ $client->image }}">
-						<p class="text-sm">{{ $client->name }}</p>
-					</td>
-					<td>
-						<p class="text-sm">{{ $client->email }}</p>
-					</td>
-					<td> <!-- Action column -->
-						<form method="POST" action="{{ route('users.update', $client) }}">
-							@csrf
-							@method('PATCH')
-							<input type="hidden" name="banned" value="{{ $client->banned ? '0' : '1' }}">
-							<button type="submit" class="bg-{{ $client->banned ? 'green' : 'red' }}-500 text-white text-sm px-3 py-1 rounded">
-								{{ $client->banned ? 'Unban' : 'Ban' }}
-							</button>
-						</form>
-						
-					</td>
-					
-				</tr>
-				@endforeach
-			</tbody>
-		</table>
+		<table class="w-full max-w-7xl mt-10 mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-[#e6f4f1] dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        <p class="text-lg text-black font-semibold italic">Event</p>
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <p class="text-lg text-black font-semibold italic">User</p>
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <p class="text-lg text-black font-semibold italic">Action</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($reservations as $reservation)
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4">
+                        <p class="text-md">{{ $reservation->event->title }}</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="text-md">{{ $reservation->user->name }}</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <form method="POST" action="{{ route('reservations.validate', $reservation) }}">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="text-white bg-[#0d9276] text-sm px-2 py-1 rounded focus:outline-none">{{ $reservation->validated ? 'Validated' : 'Validate' }}</button>
+                        </form>
+                    </td>
+                    
+                </tr>
+                @endforeach
+            
+        
 		
     </div>
 

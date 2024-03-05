@@ -24,19 +24,19 @@
 </head>
 <body >
     {{-- <x-section :doctor="$doctor"></x-section> --}}
-	<section id="sidebar">
+    <section id="sidebar">
 		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
-			<span class="text">HealthCare</span>
+			<span class="text">Evento</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
-				<a href="#">
+				<a href="{{route('admin.index')}}">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
+            <li>
 				<a href="{{route("admin.events")}}">
 					<i class='bx bxs-doughnut-chart' ></i>
 					<span class="text">Events</span>
@@ -51,9 +51,9 @@
 			
 			
 			<li>
-				<a href="#">
+				<a href="{{route('admin.reservations')}}">
 					<i class='bx bxs-group' ></i>
-					<span class="text">Team</span>
+					<span class="text">Reservations</span>
 				</a>
 			</li>
 		</ul>
@@ -65,19 +65,35 @@
 				</a>
 			</li>
 			<li>
-				<form id="logoutForm" method="POST" action="{{ route('logout') }}">
-					@csrf
-				</form>
-				
-				<a href="#" class="logout" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
-					<i class='bx bxs-log-out-circle'></i>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
-				
-				
 			</li>
 		</ul>
 	</section>
+    <section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Specialties</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">8</span>
+			</a>
+			<a href="#" class="profile">
+				{{-- <img src="{{ $client->image }}"> --}}
+			</a>
+		</nav>
+    </section>
 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>
     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +117,7 @@
                     </th>
                     <th scope="col" class="px-6 py-3">
                         <p class="text-lg text-black font-semibold italic"">
-                            Start Time
+                         Location
                         </p>
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -122,26 +138,25 @@
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                        
                         <td class="px-6 py-4">
-                            <p class="text-lg">
+                            <p class="text-md">
                                 {{ $event->title }}
                             </p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="text-lg">
+                            <p class="text-md">
                                 {{ $event->location }}
                             </p>
                         </td>
                         <td class="px-6 py-4">
-                            <p class="text-lg">
+                            <p class="text-md">
                                 {{ $event->date_time}}
                             </p>
                         </td>
                         <td class="px-6 py-4">
-                            {{--  --}}
                             <form method="POST" action="{{ route('events.approve', $event) }}">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="text-white bg-[#0d9276] text-lg px-2 py-1 rounded focus:outline-none {{ $event->approved ? 'hover:cursor-not-allowed bg-[#79a79d]' : '' }}" {{ $event->approved ? 'disabled' : '' }}>
+                                <button type="submit" class="text-white bg-[#0d9276] text-sm px-2 py-1 rounded focus:outline-none {{ $event->approved ? 'hover:cursor-not-allowed bg-[#79a79d]' : '' }}" {{ $event->approved ? 'disabled' : '' }}>
                                     {{ $event->approved ? 'Approved' : 'Approve' }}
                                 </button>
                             </form>

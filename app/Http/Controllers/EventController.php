@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
-
+use App\Models\Reservation;
 class EventController extends Controller
 {
     /**
@@ -67,7 +67,19 @@ class EventController extends Controller
 
         return back()->with('success', 'Event approved successfully.');
     }
-    
+    public function book(Event $event, Request $request)
+{
+    $user = auth()->user();
+
+    $reservation = new Reservation();
+    $reservation->event_id = $event->id;
+    $reservation->user_id = $user->id;
+    $reservation->number_of_tickets = $request->input('ticket_quantity');
+    $reservation->save();
+    return redirect('/');
+
+
+}
     /**
      * Remove the specified resource from storage.
      */

@@ -17,6 +17,7 @@ class ReservationSeeder extends Seeder
             [
                 'user_id' => 1, 
                 'event_id' => 1,
+                'number_of_tickets'=>2,
             ],
             // [
             //     'user_id' => 2, 

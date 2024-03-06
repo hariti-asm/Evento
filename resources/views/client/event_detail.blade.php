@@ -8,16 +8,32 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
+
 <body>
     <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16 relative">
-        <div class="bg-cover bg-center text-center overflow-hidden"
-            style="min-height: 500px; background-image: url('https://api.time.com/wp-content/uploads/2020/07/never-trumpers-2020-election-01.jpg?quality=85&amp;w=1201&amp;h=676&amp;crop=1')"
-            title="Woman holding a mug">
-        </div>
+        <img src="../{{ $event->image }}" class="object-cover w-full h-64 md:h-96 lg:h-120 xl:h-144" alt="{{ $event->title }}">
+    
         <div class="max-w-3xl mx-auto">
             <div class="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
                 <div class="bg-white relative top-0 -mt-32 p-5 sm:p-10">
-                    <h1 class="text-gray-900 font-bold text-3xl mb-2">{{ $event->title }}</h1>
+                  <div class="flex justify-between items-center mb-5">
+                    <h1 class="text-gray-900 font-bold text-3xl">{{ $event->title }}</h1>
+                    <form action="{{ route('booking.store',['event'=>$event]) }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="event_id" value="{{ $event->id }}">
+                        <input type="hidden" name="ticket_quantity" value="1"> 
+                    
+                        <button type="submit" class="mt-5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            Book Now
+                        </button>
+                    </form>
+                    
+                    <div>
+                        <p class="text-gray-700 text-xs mb-2">Available Seats: {{ $event->available_seats }}</p>
+                        <label for="ticket_quantity" class="block text-sm font-medium text-gray-700">Number of Tickets:</label>
+                        <input type="number" id="ticket_quantity" name="ticket_quantity" min="1" max="{{ $event->available_seats }}" class="w-20 border-green-500 rounded-md shadow-sm focus:ring focus:green-500 focus:ring-opacity-50">
+                    </div>
+                </div>
                     <p class="text-gray-700 text-xs mt-2">Written By:
                         <a href="#" class="text-indigo-600 font-medium hover:text-gray-900 transition duration-500 ease-in-out">
                             {{ $event->organizer->name }}
@@ -27,25 +43,25 @@
                             {{ $event->category->name }}
                         </a>
                     </p>
-            
+    
                     <p class="text-base leading-8 my-5">
                         {{ $event->description }}
                     </p>
-            
+    
                     <h3 class="text-2xl font-bold my-5">#1. What is Lorem Ipsum?</h3>
-            
+    
                     <p class="text-base leading-8 my-5">
                         {{ $event->description }}
                     </p>
-            
+    
                     <blockquote class="border-l-4 text-base italic leading-8 my-5 p-5 text-indigo-600">
                         {{ $event->description }}
                     </blockquote>
-            
+    
                     <p class="text-base leading-8 my-5">
                         {{ $event->description }}
                     </p>
-            
+    
                     <div class="flex flex-wrap mt-5">
                         <a href="#" class="text-xs text-indigo-600 font-medium hover:text-gray-900 transition duration-500 ease-in-out mr-2">
                             #Election
@@ -63,10 +79,14 @@
                             #Joe
                         </a>
                     </div>
+    
+                    <!-- Add booking button here -->
+                   
                 </div>
             </div>
         </div>
-        
     </div>
+    
+    
 </body>
 </html>

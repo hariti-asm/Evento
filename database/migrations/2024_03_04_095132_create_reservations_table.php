@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
            $table->foreignId('user_id')->constrained();
            $table->foreignId('event_id')->constrained();
-           $table->boolean('validated')->nullable();
+           $table->boolean('validated')->nullable()->nullable();
+           $table->integer('number_of_tickets');
             $table->timestamps();
         });
         

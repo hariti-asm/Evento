@@ -22,6 +22,7 @@ use App\Http\Controllers\ReservationController;
 // Route::any('/', [homeController::class, 'filter'])->name('home');
 Route::get('/', [homeController::class, 'filter'])->name('filter.events');
 Route::get('/event_detail/{event}', [EventController::class, 'event_detail'])->name('event_detail');
+Route::post('/events/{event}', [EventController::class, 'book'])->name('booking.store');
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');

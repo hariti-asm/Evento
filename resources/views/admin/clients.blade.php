@@ -154,7 +154,6 @@
 
 
 	
-{{-- edit --}}
 	
 </div>
 
@@ -199,9 +198,6 @@ allSideMenu.forEach(item=> {
 		li.classList.add('active');
 	})
 });
-
-
-
 
 // TOGGLE SIDEBAR
 const menuBar = document.querySelector('#content nav .bx.bx-menu');

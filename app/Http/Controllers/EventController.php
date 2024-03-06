@@ -6,6 +6,7 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 use App\Models\Reservation;
+
 class EventController extends Controller
 {
     /**
@@ -13,10 +14,10 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events=Event::all();
-    
-    return view('admin.events',compact('events'));
-}
+        $events = Event::all();
+
+        return view('admin.events', compact('events'));
+    }
 
 
     /**
@@ -42,12 +43,13 @@ class EventController extends Controller
     {
         //
     }
-    public function event_detail(Event $event){
-        $event = Event::where('id', $event->id)->first(); 
+    public function event_detail(Event $event)
+    {
+        $event = Event::where('id', $event->id)->first();
         // dd($event->organizer);
         return view('client.event_detail', compact('event'));
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -60,8 +62,8 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-   
-    public function update(EventRequest $request,Event $event)
+
+    public function update(EventRequest $request, Event $event)
     {
         $event->update(['approved' => true]);
 
@@ -70,21 +72,23 @@ class EventController extends Controller
     public function book(Event $event, Request $request)
     {
         $user = auth()->user();
-        
+
         Reservation::create([
             'event_id' => $event->id,
             'user_id' => $user->id,
             'number_of_tickets' => $request->input('ticket_quantity')
         ]);
-    
+
         return redirect('/');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+
+        return redirect()->back()->with('success', 'Event deleted successfully');
     }
 }

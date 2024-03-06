@@ -8,6 +8,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\OrganizerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +22,18 @@ use App\Http\Controllers\ReservationController;
 */
 
 // Route::any('/', [homeController::class, 'filter'])->name('home');
+// Route::group(function () {
 Route::get('/', [homeController::class, 'filter'])->name('filter.events');
 Route::get('/event_detail/{event}', [EventController::class, 'event_detail'])->name('event_detail');
 Route::post('/events/{event}', [EventController::class, 'book'])->name('booking.store');
+// });
+Route::get('/organizers', [OrganizerController::class, 'index'])->name('organizers');
+Route::get('/organizers/{event}', [OrganizerController::class, 'update'])->name('events.validate');
+// Route::prefix('organizer')->group(function () {
+
+// });
+Route::resource('events', EventController::class);
+
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
@@ -36,9 +47,6 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/events', [AdminController::class, 'index'])->name('admin.events');
     Route::patch('/clients/{user}', [UserController::class, 'update'])->name('users.update');
-
-
-
 });
 
 Route::get('/dashboard', function () {
@@ -51,4 +59,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

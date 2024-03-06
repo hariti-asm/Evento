@@ -42,11 +42,12 @@ class EventController extends Controller
     {
         //
     }
-   public function event_detail(Request $request){
-
-    $event=Event::where('id',$request->id);
-    return view('client.event_detail')->with('event');
-   }
+    public function event_detail(Event $event){
+        $event = Event::where('id', $event->id)->first(); 
+        // dd($event->organizer);
+        return view('client.event_detail', compact('event'));
+    }
+    
 
     /**
      * Show the form for editing the specified resource.

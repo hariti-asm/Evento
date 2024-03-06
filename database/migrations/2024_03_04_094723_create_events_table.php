@@ -22,6 +22,7 @@
                 $table->boolean('approved')->nullable();
                 $table->foreignId('user_id')->constrained();
                 $table->string('reservation_type')->nullable();
+                $table->string('image');
 
                 $table->timestamps();
             });

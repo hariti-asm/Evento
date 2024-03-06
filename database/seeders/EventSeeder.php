@@ -20,17 +20,21 @@ class EventSeeder extends Seeder
                 'location' => 'Art Gallery',
                 'category_id' => 1, 
                 'available_seats' => 100,
-                'organizer-id'=>1,
+                'user_id'=>2,
                 'reservation_type'=>'automatic',
+                'image'=>'images/art.jpg'
             ],
             [
-                'title' => 'Football Match',
+                'title' => 'Sea Activity',
                 'description' => 'A football match between two rival teams.',
                 'date_time' => '2024-03-02 15:00:00',
                 'location' => 'Stadium',
                 'category_id' => 2, 
                 'available_seats' => 5000,
-                'organizer-id'=>1,
+                'user_id'=>2,
+                'image'=>'images/sport.jpg',
+                'reservation_type'=>'manual',
+
 
             ],
             [
@@ -40,7 +44,11 @@ class EventSeeder extends Seeder
                 'location' => 'Conference Center',
                 'category_id' => 3, 
                 'available_seats' => 300,
-                'organizer-id'=>1,
+                'user_id'=>2,
+                'image'=>'images/sport.jpg',
+                'reservation_type'=>'manual',
+
+
 
             ],
         ];

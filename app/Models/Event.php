@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     use HasFactory;
-    protected $fillable=['title','description','date_time','location','category_id','available_seats','approved', 'organizer_id','reservation_type'];
+    protected $fillable=['title','description','date_time','location','category_id','available_seats','approved', 'organizer_id','reservation_type','image'];
 
     public function organizer()
     {
-        return $this->belongsTo(User::class,'id')->where('user_type', 2);
+        return $this->belongsTo(User::class,'user_id');
     }
      public function category()
     {

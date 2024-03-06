@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
@@ -15,8 +16,9 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::all();
+        $categories=Category::all();
 
-        return view('admin.events', compact('events'));
+        return view('admin.events', compact('events','categories'));
     }
 
 
@@ -31,10 +33,23 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
+    // public function store(EventRequest $request)
+    // {dd($request);
+    //     $validatedData = $request->validated();
+    
+    //     if ($request->hasFile('image')) {
+    //         $image = $request->file('image');
+    //         $imageName = time() . '_' . $image->getClientOriginalName();
+    //         $image->storeAs('public/images', $imageName);
+    //         $validatedData['image'] = $imageName;
+    //     }
+    
+    //     Event::create($validatedData);
+    
+    //     return redirect()->route('events.index')->with('success', 'Event created successfully.');
+    // }
+    
 
     /**
      * Display the specified resource.

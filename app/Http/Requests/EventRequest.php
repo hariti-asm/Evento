@@ -20,15 +20,19 @@ class EventRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
-        return [
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'date_time' => 'required|date',
-            'available_seats' => 'required|integer|min:1',
-            'category_id' => 'required|exists:categories,id',
-        ];
-    }
+   public function rules(): array
+{
+    return [
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'date_time' => 'required|date',
+        'location' => 'required|string',
+        'category_id' => 'required|exists:categories,id',
+        'available_seats' => 'required|integer|min:1',
+        'reservation_type' => 'required|string',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+    ];
+}
+
     
 }

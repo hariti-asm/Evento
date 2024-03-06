@@ -10,16 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\OrganizerController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 // Route::any('/', [homeController::class, 'filter'])->name('home');
 // Route::group(function () {
@@ -29,9 +20,12 @@ Route::post('/events/{event}', [EventController::class, 'book'])->name('booking.
 // });
 Route::get('/organizers', [OrganizerController::class, 'index'])->name('organizers');
 Route::get('/organizers/{event}', [OrganizerController::class, 'update'])->name('events.validate');
-// Route::prefix('organizer')->group(function () {
+Route::group(["prefix" => "organiser", "as" => "organiser."], function (){
+    Route::post('events', [OrganizerController::class, 'store'])->name('events.store');
+    Route::put('events/{id}', [OrganizerController::class, 'update'])->name('events.update');
+});
 
-// });
+
 Route::resource('events', EventController::class);
 
 
@@ -44,7 +38,6 @@ Route::prefix('admin')->group(function () {
     Route::patch('/events/{event}/approve', [AdminController::class, 'update'])->name('events.approve');
     Route::patch('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.validate');
     Route::get('/reservations', [ReservationController::class, 'index'])->name('admin.reservations');
-
     Route::get('/events', [AdminController::class, 'index'])->name('admin.events');
     Route::patch('/clients/{user}', [UserController::class, 'update'])->name('users.update');
 });

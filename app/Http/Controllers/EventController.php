@@ -68,18 +68,18 @@ class EventController extends Controller
         return back()->with('success', 'Event approved successfully.');
     }
     public function book(Event $event, Request $request)
-{
-    $user = auth()->user();
-
-    $reservation = new Reservation();
-    $reservation->event_id = $event->id;
-    $reservation->user_id = $user->id;
-    $reservation->number_of_tickets = $request->input('ticket_quantity');
-    $reservation->save();
-    return redirect('/');
-
-
-}
+    {
+        $user = auth()->user();
+        
+        Reservation::create([
+            'event_id' => $event->id,
+            'user_id' => $user->id,
+            'number_of_tickets' => $request->input('ticket_quantity')
+        ]);
+    
+        return redirect('/');
+    }
+    
     /**
      * Remove the specified resource from storage.
      */

@@ -20,6 +20,8 @@ class EventSeeder extends Seeder
                 'location' => 'Art Gallery',
                 'category_id' => 1, 
                 'available_seats' => 100,
+                'organizer-id'=>1,
+                'reservation_type'=>'automatic',
             ],
             [
                 'title' => 'Football Match',
@@ -28,6 +30,8 @@ class EventSeeder extends Seeder
                 'location' => 'Stadium',
                 'category_id' => 2, 
                 'available_seats' => 5000,
+                'organizer-id'=>1,
+
             ],
             [
                 'title' => 'Political Conference',
@@ -36,6 +40,8 @@ class EventSeeder extends Seeder
                 'location' => 'Conference Center',
                 'category_id' => 3, 
                 'available_seats' => 300,
+                'organizer-id'=>1,
+
             ],
         ];
 

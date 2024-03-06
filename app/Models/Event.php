@@ -12,7 +12,7 @@ class Event extends Model
 
     public function organizer()
     {
-        return $this->belongsTo(User::class)->where('user_type', 2);
+        return $this->belongsTo(User::class,'id')->where('user_type', 2);
     }
      public function category()
     {

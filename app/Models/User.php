@@ -45,4 +45,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-}
+    public function evnents(){
+        return $this->hasMany(Event::Class,'organizer_id');
+    
+}}

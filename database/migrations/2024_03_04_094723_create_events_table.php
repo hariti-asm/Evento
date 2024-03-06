@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->integer('available_seats');
             $table->boolean('approved')->nullable();
+            $table->foreignId('organizer_id')->constrained();
+            $table->integer('organizer_id');
             $table->timestamps();
         });
         

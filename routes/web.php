@@ -8,9 +8,6 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReservationController;
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +21,7 @@ use App\Http\Controllers\ReservationController;
 
 // Route::any('/', [homeController::class, 'filter'])->name('home');
 Route::get('/', [homeController::class, 'filter'])->name('filter.events');
+Route::get('/event_detail', [EventController::class, 'event_detail'])->name('event_detail');
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
@@ -31,11 +29,11 @@ Route::prefix('admin')->group(function () {
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::get('/clients', [AdminController::class, 'getclients'])->name('admin.clients');
-    Route::patch('/events/{event}/approve', [EventController::class, 'update'])->name('events.approve');
+    Route::patch('/events/{event}/approve', [AdminEventController::class, 'update'])->name('events.approve');
     Route::patch('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.validate');
     Route::get('/reservations', [ReservationController::class, 'index'])->name('admin.reservations');
 
-    Route::get('/events', [EventController::class, 'index'])->name('admin.events');
+    Route::get('/events', [AdminEventController::class, 'index'])->name('admin.events');
     Route::patch('/clients/{user}', [UserController::class, 'update'])->name('users.update');
 
 

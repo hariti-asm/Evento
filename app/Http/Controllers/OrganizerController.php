@@ -97,6 +97,19 @@ class OrganizerController extends Controller
     
         return redirect()->route('events.index')->with('success', 'Event updated successfully.');
     }
+    public function reservation_type(Request $request, Event $event)
+    { 
+        // dd($event->reservation_type);
+        $validatedData = $request->validate([
+            'reservation_type' => 'required|in:manual,automatic',
+        ]);
+    
+        $newReservationType = ($event->reservation_type === 'manual') ? 'automatic' : 'manual';
+    
+        $event->update(['reservation_type' => $newReservationType]);
+    
+        return back()->with('success', 'Reservation type updated successfully.');
+    }
     
 
     /**

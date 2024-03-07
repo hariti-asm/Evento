@@ -14,20 +14,23 @@
 </head>
 <body>
     <x-sidebar></x-sidebar>
+    <div class="head  float-end mx-auto mr-[2%]">
+        <h4>Events</h4>
+        <a href="#" data-toggle="modal" data-target="#addeventModal"><i class='bx bx-plus'></i></a>
+        <i class='bx bx-filter'></i>
+        
+    </div>
     <div class="table-data">
         <div class="todo">
-            <div class="head  float-end mx-auto">
-                <h4>Events</h4>
-                <a href="#" data-toggle="modal" data-target="#addeventModal"><i class='bx bx-plus'></i></a>
-                <i class='bx bx-filter'></i>
-            </div>
-            <table class="table-auto w-full max-w-[50%] mx-auto">
+            <table class="table-auto w-full max-w-[70%] ml-[25%] mx-auto mt-[5%] ">
                 <thead>
                     <tr>
                         <th class="px-4 py-2">Event Name</th>
                         <th class="px-4 py-2">Event date</th>
 
                         <th class="px-4 py-2">Actions</th>
+                        <th class="px-4 py-2">acceptation</th>
+                    
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +47,19 @@
                                 @method('DELETE')
                             </form>
                         </td>
+                       <td> 
+						<form method="POST" action="{{ route('organiser.reservation.update', $event) }}">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="reservation_type" value="{{ $event->reservation_type }}">
+                            <button type="submit" class="bg-{{ $event->reservation_type === 'manual' ? 'green' : 'red' }}-500 text-white text-sm px-4 py-2 rounded">
+                                {{ $event->reservation_type === 'manual' ? 'Manual' : 'Automatic' }}
+                            </button>
+                        </form>
+                        
+                        
+                        
+                       </td>
                     </tr>
                     @endforeach
                 </tbody>

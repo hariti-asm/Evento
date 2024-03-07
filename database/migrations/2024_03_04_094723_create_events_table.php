@@ -21,7 +21,7 @@
                 $table->integer('available_seats');
                 $table->boolean('approved')->default(true);
                 $table->foreignId('user_id')->constrained()->nullable();
-                $table->string('reservation_type')->nullable();
+                $table->enum('reservation_type', ['manual', 'automatic'])->default('manual');
                 $table->string('image');
 
                 $table->timestamps();

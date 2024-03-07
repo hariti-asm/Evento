@@ -66,7 +66,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // Validate the incoming request data
         $validatedData = $request->validate([
             'banned' => 'required|boolean',
         ]);

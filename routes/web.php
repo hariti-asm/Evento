@@ -21,6 +21,7 @@ Route::get('/organizers/{event}', [OrganizerController::class, 'update'])->name(
 Route::group(["prefix" => "organiser", "as" => "organiser."], function (){
     Route::post('events', [OrganizerController::class, 'store'])->name('events.store');
     Route::put('events/{id}', [OrganizerController::class, 'update'])->name('events.update');
+    Route::match(['put', 'patch'], 'reservation/{event}', [OrganizerController::class, 'reservation_type'])->name('reservation.update');
 });
 
 

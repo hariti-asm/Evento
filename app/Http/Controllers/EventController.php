@@ -106,4 +106,9 @@ class EventController extends Controller
 
         return redirect()->back()->with('success', 'Event deleted successfully');
     }
+
+
+
+
+   
 }

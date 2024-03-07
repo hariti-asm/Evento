@@ -21,7 +21,7 @@ class EventRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
    public function rules(): array
-{
+{ 
     return [
         'title' => 'required',
         'description' => 'required',
@@ -30,6 +30,7 @@ class EventRequest extends FormRequest
         'category_id' => 'required',
         'available_seats' => 'required',
         'reservation_type' => 'required',
+        'user_id' => 'required',
         'image' => 'required', 
     ];
 }

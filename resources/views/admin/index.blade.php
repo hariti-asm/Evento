@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <x-section></x-section>
+    <x-sidebar></x-sidebar>
 
 
 

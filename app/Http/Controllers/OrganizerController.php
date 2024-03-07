@@ -4,20 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Category;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\ReservationRequest;
 
 class OrganizerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+   public function index()
+{
+    $events = Event::leftJoin('reservations', 'events.id', '=', 'reservations.event_id')
+                    ->select('events.*', DB::raw('COUNT(reservations.id) as reservations_count'))
+                    ->where('reservations.validated', true)
+                    ->groupBy('events.id')
+                    ->get();
+
+
+    return view("organizer.index", compact('events'));
+}
+    public function events()
     {    $events=Event::all();
         $categories=Category::all();
-        return view("organizer.index",compact('events','categories'));
+        return view("organizer.events",compact('events','categories'));
     }
-
+  
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -32,7 +47,7 @@ class OrganizerController extends Controller
 
     
      public function store(EventRequest $request)
-     {
+     { 
          $validatedData = $request->validated();
          
          if ($request->hasFile('image')) {

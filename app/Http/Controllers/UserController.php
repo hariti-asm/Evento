@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Reservation;
+use Illuminate\Http\Request;
+use App\Http\Requests\ReservationRequest;
 
 class UserController extends Controller
 {
@@ -71,11 +73,14 @@ class UserController extends Controller
         ]);
     
         // Toggle the banned status
-        $user->update(['banned' => !$user->banned]);
     
         return back()->with('success', 'User status updated successfully.');
     }
-    
+    public function accept( Reservation $reservation)
+    {
+        $reservation->update(['validated' => true]);
+        return back()->with('success', 'Registration validated successfully.');
+    }
 
     /**
      * Remove the specified resource from storage.

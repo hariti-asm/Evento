@@ -22,6 +22,13 @@ Route::group(["prefix" => "organiser", "as" => "organiser."], function (){
     Route::post('events', [OrganizerController::class, 'store'])->name('events.store');
     Route::put('events/{id}', [OrganizerController::class, 'update'])->name('events.update');
     Route::match(['put', 'patch'], 'reservation/{event}', [OrganizerController::class, 'reservation_type'])->name('reservation.update');
+    Route::get('/statistic', [OrganizerController::class, 'index'])->name('statistics');
+    Route::get('/events_data', [OrganizerController::class, 'events'])->name('events');
+    Route::get('/reservations', [ReservationController::class, 'index'])->name('organiser.reservations');
+    Route::put('/acceptations/{reservation}', [UserController::class, 'accept'])->name('reservations.accept');
+    Route::delete('/reservations/{reservation}', [ReservationController::class, 'delete'])->name('reservation.delete');
+
+
 });
 
 
@@ -35,8 +42,7 @@ Route::prefix('admin')->group(function () {
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::get('/clients', [AdminController::class, 'getclients'])->name('admin.clients');
     Route::patch('/events/{event}/approve', [AdminController::class, 'update'])->name('events.approve');
-    Route::patch('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.validate');
-    Route::get('/reservations', [ReservationController::class, 'index'])->name('admin.reservations');
+
     Route::get('/events', [AdminController::class, 'index'])->name('admin.events');
     Route::patch('/clients/{user}', [UserController::class, 'update'])->name('users.update');
 });

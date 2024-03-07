@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <x-section></x-section>
+    <x-sidebar></x-sidebar>
 
 
 
@@ -70,19 +70,31 @@
                     <td class="px-6 py-4">
                         <p class="text-md">{{ $reservation->user->name }}</p>
                     </td>
-                    <td class="px-6 py-4">
-                        <form method="POST" action="{{ route('reservations.validate', $reservation) }}">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit" class="text-white bg-[#0d9276] text-sm px-2 py-1 rounded focus:outline-none">{{ $reservation->validated ? 'Validated' : 'Validate' }}</button>
-                        </form>
-                    </td>
+                        <td class="px-6 py-4 flex gap-2">
+                            {{--  --}}
+                            <form method="POST" action="{{ route('organiser.reservations.accept', $reservation) }}">
+                                @csrf
+                                @method('PUT')
+                                @if($reservation->validated)
+                                    <span class="text-green-700 text-sm">Accepted</span>
+                                @else
+                                    <button type="submit" class="text-white bg-blue-700 text-sm px-2 py-1 rounded focus:outline-none">Accept</button>
+                                @endif
+                            </form>
+                            
+                            @if(!$reservation->validated)
+                                <form method="POST" action="{{ route('organiser.reservation.delete', $reservation) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-white bg-red-500 text-sm px-2 py-1 rounded focus:outline-none">Refuse</button>
+                                </form>
+                            @endif
+                            
+                        </td>
+               
                     
                 </tr>
                 @endforeach
-            
-        
-		
     </div>
 
 

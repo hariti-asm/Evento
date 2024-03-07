@@ -41,8 +41,8 @@
 
         <div class="mt-4">
             <x-input-label for="profile_picture" :value="__('Profile Picture')" />
-            <input id="profile_picture" type="file" name="profile_picture" accept="image/*"> <!-- Corrected to 'profile_picture' -->
-            <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" /> <!-- Corrected to 'profile_picture' -->
+            <input id="profile_picture" type="file" name="profile_picture" accept="image/*"> 
+            <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
         </div>
         
         <!-- Role -->
@@ -55,10 +55,7 @@
             <x-input-error :messages="$errors->get('user_type')" class="mt-2" />
         </div>
 
-        <!-- Speciality -->
-        
-        
-        <!-- Register Button -->
+    
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
@@ -69,14 +66,5 @@
         </div>
     </form>
     
-    <script>
-        document.getElementById('role').addEventListener('change', function() {
-            var specialityField = document.getElementById('specialityField');
-            if (this.value == '2') {
-                specialityField.style.display = 'block';
-            } else {
-                specialityField.style.display = 'none';
-            }
-        });
-    </script>
+   
 </x-guest-layout>

@@ -4,28 +4,18 @@
         <span class="text">Evento</span>
     </a>
     <ul class="side-menu top">
-        <li class="active">
-            <a href="{{route('admin.index')}}">
-                <i class='bx bxs-dashboard' ></i>
-                <span class="text">Dashboard</span>
-            </a>
-        </li>
+     
         <li>
-            <a href="{{route("admin.events")}}">
+            <a href="{{route("organiser.events")}}">
                 <i class='bx bxs-doughnut-chart' ></i>
                 <span class="text">Events</span>
             </a>
         </li>
-        <li>
-            <a href="{{route('admin.clients')}}">
-                <i class='bx bxs-shopping-bag-alt' ></i>
-                <span class="text">clients</span>
-            </a>
-        </li>
+        
         
         
         <li>
-            <a href="{{route('admin.reservations')}}">
+            <a href="{{route('organiser.organiser.reservations')}}">
                 <i class='bx bxs-group' ></i>
                 <span class="text">Reservations</span>
             </a>

@@ -37,13 +37,8 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function update(ReservationRequest $request, Reservation $reservation)
-    {
-    dd($request);
-        $reservation->update(['validated' => !$reservation->validated]);
+   
     
-        return back()->with('success', 'Registration validated successfully.');
-    }
     
 
     
@@ -64,8 +59,10 @@ class ReservationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Reservation $reservation)
-    {
-        //
-    }
+    public function delete(Reservation $reservation)
+{
+    $reservation->delete();
+    return back();
+}
+
 }

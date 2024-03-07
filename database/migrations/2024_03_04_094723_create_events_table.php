@@ -19,8 +19,8 @@
                 $table->string('location');
                 $table->foreignId('category_id')->constrained();
                 $table->integer('available_seats');
-                $table->boolean('approved')->nullable();
-                $table->foreignId('user_id')->constrained();
+                $table->boolean('approved')->default(true);
+                $table->foreignId('user_id')->constrained()->nullable();
                 $table->string('reservation_type')->nullable();
                 $table->string('image');
 

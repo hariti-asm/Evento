@@ -8,15 +8,12 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.tailwindcss.com"></script>
 
-
 </head>
 <body>
-    {{-- <x-section></x-section> --}}
+    <x-sidebar></x-sidebar>
     <div class="table-data">
         <div class="todo">
             <div class="head  float-end mx-auto">
@@ -98,7 +95,10 @@
                                 <label for="reservation_type" class="font-semibold">Reservation Type:</label>
                                 <input type="text" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="reservation_type" name="reservation_type">
                             </div>
-                          
+                            <div class="form-group">
+                                <label for="image" class="font-semibold">Image:</label>
+                                <input type="file" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="image" name="image">
+                            </div>
                             
                             <button type="submit" class="bg-[#99BC85] text-white font-semibold text-md px-3 py-1 rounded-full w-full max-w-sm">Add Event</button>
                         </form>
@@ -109,39 +109,40 @@
         </div>
     </div>
     @foreach($events as $event)
-    <div class="modal fade hidden" id="editeventModal{{ $event->id }}" tabindex="-1" aria-labelledby="editeventModalLabel{{ $event->id }}" aria-hidden="true" data-modal-target="editeventModal{{ $event->id }}">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="editeventModalLabel{{ $event->id }}">Edit Event</h5>
-                    <button type="button" class="close" data-modal-hide="editeventModal{{ $event->id }}" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div id="editeventModal{{ $event->id }}" class="modal fixed inset-0 overflow-y-auto hidden" tabindex="-1" aria-labelledby="editeventModalLabel{{ $event->id }}" aria-hidden="true" data-modal-target="editeventModal{{ $event->id }}">
+        <!-- Modal dialog -->
+        <div class="modal-dialog flex items-center justify-center min-h-screen">
+            <div class="modal-content bg-white rounded-lg shadow-lg max-w-md w-full">
+                <div class="modal-header flex justify-between bg-gray-100 py-2 px-4">
+                    <h5 class="modal-title text-lg font-semibold" id="editeventModalLabel{{ $event->id }}">Edit Event</h5>
+                    <button type="button" class="btn-close" data-modal-hide="editeventModal{{ $event->id }}" aria-label="Close">X</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4">
+                    <!-- Form for editing an event -->
                     <form action="{{ route('organiser.events.update', $event->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="title">Event Title:</label>
-                            <input type="text" class="form-control" id="title" name="title" value="{{ $event->title }}" required>
+                            <label for="title" class="font-semibold">Event Title:</label>
+                            <input type="text" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="title" name="title" value="{{ $event->title }}" required>
                         </div>
                         <div class="form-group">
-                            <label for="description">Event Description:</label>
-                            <textarea class="form-control" id="description" name="description" required>{{ $event->description }}</textarea>
+                            <label for="description" class="font-semibold">Event Description:</label>
+                            <textarea class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="description" name="description" required>{{ $event->description }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="image">Event Image:</label>
-                            <input type="file" class="form-control" id="image" name="image">
+                            <label for="image" class="font-semibold">Event Image:</label>
+                            <input type="file" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="image" name="image">
                             <img src="{{ asset($event->image) }}" alt="Event Image" class="img-fluid mt-2" style="max-height: 200px;">
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Event</button>
+                        <button type="submit" class="bg-[#99BC85] text-white font-semibold text-md px-3 py-1 rounded-full w-full max-w-sm">Update Event</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
     @endforeach
+    
     
     <script>
         document.addEventListener("DOMContentLoaded", function () {

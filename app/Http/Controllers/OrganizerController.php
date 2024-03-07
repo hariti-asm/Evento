@@ -31,34 +31,22 @@ class OrganizerController extends Controller
      */
 
     
-    public function store(Request $request)
-    {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'date_time' => 'required|date',
-            'location' => 'required|string',
-        'category_id' => 'required|exists:categories,id',
-            'available_seats' => 'required|integer|min:1',
-            'reservation_type' => 'required|string',
-            'image' => 'nullable|required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $imageName);
-            $validatedData['image'] = $imageName;
-        }
-    
-        // Create the event using the validated data
-        Event::create($validatedData);
-    
-        // Redirect the user to a success page or back to the events listing page
-        return redirect()->route('events.index')->with('success', 'Event created successfully.');
-    }
-    
+     public function store(EventRequest $request)
+     {
+         $validatedData = $request->validated();
+         
+         if ($request->hasFile('image')) {
+             $image = $request->file('image');
+             $imageName = time() . '_' . $image->getClientOriginalName();
+             $image->storeAs('public/images', $imageName);
+             $validatedData['image'] = $imageName;
+         }
+         
+         Event::create($validatedData);
+     
+         return redirect()->route('events.index')->with('success', 'Event created successfully.');
+     }
+     
 
     
 
@@ -98,7 +86,6 @@ class OrganizerController extends Controller
         $event->title = $validatedData['title'];
         $event->description = $validatedData['description'];
     
-        // Handle image upload if a new image is provided
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
@@ -106,10 +93,8 @@ class OrganizerController extends Controller
             $event->image = $imageName;
         }
     
-        // Save the updated event
         $event->save();
     
-        // Redirect back to event listing page with success message
         return redirect()->route('events.index')->with('success', 'Event updated successfully.');
     }
     

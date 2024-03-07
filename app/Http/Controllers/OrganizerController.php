@@ -59,7 +59,7 @@ class OrganizerController extends Controller
          
          Event::create($validatedData);
      
-         return redirect()->route('events.index')->with('success', 'Event created successfully.');
+         return back()->with('success', 'Event created successfully.');
      }
      
 

@@ -27,8 +27,6 @@
                 <span class="text">Reservations</span>
             </a>
         </li>
-    </ul>
-    <ul class="side-menu">
         <li>
             <a href="#">
                 <i class='bx bxs-cog' ></i>

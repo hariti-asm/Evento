@@ -78,7 +78,7 @@ class EventController extends Controller
             'total_price' => $totalPrice,
         ]);
 
-        return redirect()->route('ticket', compact('event', 'seats_quantity'));
+        return redirect()->route('ticket', compact('event'));
     }
 
 

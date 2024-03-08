@@ -109,11 +109,17 @@
                             </div>
                             <input type="hidden" name="user_id" id="user_id" value="{{ Auth::id() }}">
                             <div class="form-group">
-                                <label for="reservation_type" class="font-semibold text-sm ">Reservation Type:</label>
-                                <input type="text" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="reservation_type" name="reservation_type">
+                                <label for="reservation_type" class="font-semibold text-sm">Reservation Type:</label>
+                                <div class="flex items-center mt-2">
+                                    <input type="radio" id="manual_reservation" name="reservation_type" value="manual" class="mr-2">
+                                    <label for="manual_reservation" class="mr-4">Manual</label>
+                                    <input type="radio" id="automatic_reservation" name="reservation_type" value="automatic" class="mr-2">
+                                    <label for="automatic_reservation">Automatic</label>
+                                </div>
                             </div>
+                            
                             <div class="form-group">
-                                <label for="price" class="font-semibold text-sm ">Reservation Type:</label>
+                                <label for="price" class="font-semibold text-sm ">Price:</label>
                                 <input type="text" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="reservation_type" name="price">
                             </div>
                             <div class="form-group">

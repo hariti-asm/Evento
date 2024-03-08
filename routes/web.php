@@ -1,24 +1,26 @@
 <?php
 
+use App\Http\Middleware\UserType1;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\OrganizerController;
-use App\Http\Controllers\TicketController;
+use App\Http\Controllers\ReservationController;
 
-
-Route::get('/', [homeController::class, 'filter_Scope'])->name('filter.events');
-Route::get('/event_detail/{event}', [EventController::class, 'event_detail'])->name('event_detail');
-Route::post('/events/{event}', [EventController::class, 'book'])->name('booking.store');
-Route::get('/ticket/{event}', [TicketController::class, 'show'])->name('ticket');
+Route::middleware(['user.type1'])->group(function () {
+    Route::get('/', [HomeController::class, 'filter_Scope'])->name('filter.events');
+    Route::get('/event_detail/{event}', [EventController::class, 'event_detail'])->name('event_detail');
+    Route::post('/events/{event}', [EventController::class, 'book'])->name('booking.store');
+    Route::get('/ticket/{event}', [TicketController::class, 'show'])->name('ticket');
+});
 Route::get('/organizers', [OrganizerController::class, 'index'])->name('organizers');
-Route::get('/organizers/{event}', [OrganizerController::class, 'update'])->name('events.validate');
 Route::group(["prefix" => "organiser", "as" => "organiser."], function (){
+    Route::get('/organizers/{event}', [OrganizerController::class, 'update'])->name('events.validate');
     Route::post('events', [OrganizerController::class, 'store'])->name('events.store');
     Route::put('events/{id}', [OrganizerController::class, 'update'])->name('events.update');
     Route::match(['put', 'patch'], 'reservation/{event}', [OrganizerController::class, 'reservation_type'])->name('reservation.update');

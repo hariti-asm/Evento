@@ -89,7 +89,9 @@
                 </div>
             </div>
             @endforeach
-            {{ $events->links() }}
+            <div class="flex justify-center  my-4">
+                {{ $events->links() }}
+            </div>
 
         </div>
     </div>

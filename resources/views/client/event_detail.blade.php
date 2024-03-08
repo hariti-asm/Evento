@@ -11,7 +11,7 @@
 
 <body>
     <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16 relative">
-        <img src="../{{ $event->image }}" class="object-cover w-full h-64 md:h-96 lg:h-120 xl:h-144" alt="{{ $event->title }}">
+        <img src="../{{ asset('storage/images/' . $event->image) }}" class="object-cover w-full h-64 md:h-96 lg:h-120 xl:h-144" alt="{{ $event->title }}">
     
         <div class="max-w-3xl mx-auto">
             <div class="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">

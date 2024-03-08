@@ -160,7 +160,7 @@
                         <div class="form-group">
                             <label for="image" class="font-semibold">Event Image:</label>
                             <input type="file" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="image" name="image">
-                            <img src="{{ asset($event->image) }}" alt="Event Image" class="img-fluid mt-2" style="max-height: 200px;">
+                            <img src="{{ asset('storage/images/' . $event->image) }}" alt="Event Image" class="img-fluid mt-2" style="max-height: 200px;">
                         </div>
                         <button type="submit" class="bg-[#99BC85] text-white font-semibold text-md px-3 py-1 rounded-full w-full max-w-sm">Update Event</button>
                     </form>

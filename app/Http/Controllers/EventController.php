@@ -16,9 +16,9 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::all();
-        $categories=Category::all();
+        $categories = Category::all();
 
-        return view('admin.events', compact('events','categories'));
+        return view('admin.events', compact('events', 'categories'));
     }
 
 
@@ -30,26 +30,8 @@ class EventController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
 
-    // public function store(EventRequest $request)
-    // {dd($request);
-    //     $validatedData = $request->validated();
-    
-    //     if ($request->hasFile('image')) {
-    //         $image = $request->file('image');
-    //         $imageName = time() . '_' . $image->getClientOriginalName();
-    //         $image->storeAs('public/images', $imageName);
-    //         $validatedData['image'] = $imageName;
-    //     }
-    
-    //     Event::create($validatedData);
-    
-    //     return redirect()->route('events.index')->with('success', 'Event created successfully.');
-    // }
-    
+
 
     /**
      * Display the specified resource.
@@ -87,15 +69,18 @@ class EventController extends Controller
     public function book(Event $event, Request $request)
     {
         $user = auth()->user();
-
+        $numberOfTickets = $request->input('ticket_quantity');
+        $totalPrice = $numberOfTickets * $event->price;
         Reservation::create([
             'event_id' => $event->id,
             'user_id' => $user->id,
-            'number_of_tickets' => $request->input('ticket_quantity')
+            'number_of_tickets' => $numberOfTickets,
+            'total_price' => $totalPrice,
         ]);
 
-        return redirect('/');
+        return redirect()->route('ticket', compact('event', 'seats_quantity'));
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -110,5 +95,5 @@ class EventController extends Controller
 
 
 
-   
+
 }

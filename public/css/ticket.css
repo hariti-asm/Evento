@@ -96,7 +96,7 @@ html {
 }
 
 .date .june-29 {
-	color: hsl(57, 97%, 45%);
+	color: rgb(79 70 229);
 	font-size: 20px;
 }
 
@@ -110,7 +110,7 @@ html {
 	font-size: 48px;
 	font-weight: 700;
 	/* letter-spacing: 0.1em; */
-	color: hsl(57, 97%, 45%);
+	color: rgb(79 70 229);
 }
 
 .time {

@@ -34,8 +34,10 @@ class TicketController extends Controller
      * Display the specified resource.
      */
     public function show(Event $event)
-    { $event=Event::where('id',$event->id)->first();
-        return view(('client.ticket'));
+    { 
+        // dd($event);
+        $event=Event::where('id',$event->id)->first();
+        return view('client.ticket', compact('event'));
 
     }
 

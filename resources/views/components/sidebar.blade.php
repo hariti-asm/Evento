@@ -4,6 +4,13 @@
         <span class="text">Evento</span>
     </a>
     <ul class="side-menu top">
+        <li>
+            <a href="{{route("organizers")}}">
+                <i class='bx bxs-doughnut-chart' ></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+        
      
         <li>
             <a href="{{route("organiser.events")}}">

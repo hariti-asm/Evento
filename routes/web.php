@@ -12,10 +12,10 @@ use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\TicketController;
 
 
-Route::get('/', [homeController::class, 'filter'])->name('filter.events');
+Route::get('/', [homeController::class, 'filter_Scope'])->name('filter.events');
 Route::get('/event_detail/{event}', [EventController::class, 'event_detail'])->name('event_detail');
 Route::post('/events/{event}', [EventController::class, 'book'])->name('booking.store');
-Route::get('/ticket', [TicketController::class, 'index'])->name('ticket');
+Route::get('/ticket/{event}', [TicketController::class, 'show'])->name('ticket');
 Route::get('/organizers', [OrganizerController::class, 'index'])->name('organizers');
 Route::get('/organizers/{event}', [OrganizerController::class, 'update'])->name('events.validate');
 Route::group(["prefix" => "organiser", "as" => "organiser."], function (){

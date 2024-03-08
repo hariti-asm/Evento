@@ -22,7 +22,8 @@ class EventSeeder extends Seeder
                 'available_seats' => 100,
                 'user_id'=>2,
                 'reservation_type'=>'automatic',
-                'image'=>'images/art.jpg'
+                'image'=>'images/art.jpg',
+                'price'=>15,
             ],
             [
                 'title' => 'Sea Activity',
@@ -34,6 +35,8 @@ class EventSeeder extends Seeder
                 'user_id'=>2,
                 'image'=>'images/sport.jpg',
                 'reservation_type'=>'manual',
+                'price'=>10,
+
 
 
             ],
@@ -47,6 +50,8 @@ class EventSeeder extends Seeder
                 'user_id'=>2,
                 'image'=>'images/sport.jpg',
                 'reservation_type'=>'manual',
+                'price'=>18,
+
 
 
 

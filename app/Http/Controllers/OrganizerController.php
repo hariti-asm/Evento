@@ -17,14 +17,12 @@ class OrganizerController extends Controller
      */
    public function index()
 {
-    $events = Event::leftJoin('reservations', 'events.id', '=', 'reservations.event_id')
-                    ->select('events.*', DB::raw('COUNT(reservations.id) as reservations_count'))
-                    ->where('reservations.validated', true)
-                    ->groupBy('events.id')
-                    ->get();
+ 
+                    $todayReservationCount = Reservation::whereDate('created_at', now()->toDateString())->count();
+                    $totalIncome = Reservation::sum('total_price');
+                    $todayIncome = Reservation::whereDate('created_at', now()->toDateString())->sum('total_price');
 
-
-    return view("organizer.index", compact('events'));
+    return view("organizer.index", compact('todayReservationCount','totalIncome','todayIncome'));
 }
     public function events()
     {    $events=Event::all();
@@ -97,7 +95,6 @@ class OrganizerController extends Controller
         // Find the event by ID
         $event = Event::findOrFail($id);
     
-        // Update event properties with new data
         $event->title = $validatedData['title'];
         $event->description = $validatedData['description'];
     

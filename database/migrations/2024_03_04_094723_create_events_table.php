@@ -23,6 +23,7 @@
                 $table->foreignId('user_id')->constrained()->nullable();
                 $table->enum('reservation_type', ['manual', 'automatic'])->default('manual');
                 $table->string('image');
+                $table->integer('price');
 
                 $table->timestamps();
             });

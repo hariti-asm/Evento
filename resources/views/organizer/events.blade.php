@@ -113,6 +113,10 @@
                                 <input type="text" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="reservation_type" name="reservation_type">
                             </div>
                             <div class="form-group">
+                                <label for="price" class="font-semibold text-sm ">Reservation Type:</label>
+                                <input type="text" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="reservation_type" name="price">
+                            </div>
+                            <div class="form-group">
                                 <label for="image" class="font-semibold text-sm">Image:</label>
                                 <input type="file" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="image" name="image">
                             </div>

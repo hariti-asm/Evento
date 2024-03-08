@@ -28,22 +28,31 @@
                         </button>
                     </form>
                     
-                    <div>
+                    <div class="flex flex-col">
                         <p class="text-gray-700 text-xs mb-2">Available Seats: {{ $event->available_seats - $event->reservations()->sum('number_of_tickets') }}</p>
                         <label for="ticket_quantity" class="block text-sm font-medium text-gray-700">Number of Tickets:</label>
                         <input type="number" id="ticket_quantity" name="ticket_quantity" min="1" max="{{ $event->available_seats }}" class="w-20 border-green-500 rounded-md shadow-sm focus:ring focus:green-500 focus:ring-opacity-50">
+                        <div class="flex gap-4">
+
+
+                            <span>    Price:</span> <p class="text-[15px] font-bold">${{ $event->price }}</p>
+
+                        </div>
+
                     </div>
                 </div>
-                    <p class="text-gray-700 text-xs mt-2">Written By:
-                        <a href="#" class="text-indigo-600 font-medium hover:text-gray-900 transition duration-500 ease-in-out">
-                            {{ $event->organizer->name }}
-                        </a>
-                        In
-                        <a href="#" class="text-xs text-indigo-600 font-medium hover:text-gray-900 transition duration-500 ease-in-out">
-                            {{ $event->category->name }}
-                        </a>
-                    </p>
-    
+                <div class=" flex gap-2 text-gray-700 text-xs mt-2">Written By:
+                    <a href="#" class="text-indigo-600 font-medium hover:text-gray-900 transition duration-500 ease-in-out">
+                        {{ $event->organizer->name }}
+                    </a>
+                    In
+                    <a href="#" class="text-xs text-indigo-600 font-medium hover:text-gray-900 transition duration-500 ease-in-out">
+                        {{ $event->category->name }}
+                    </a>
+                </div>
+                
+                
+                
                     <p class="text-base leading-8 my-5">
                         {{ $event->description }}
                     </p>
@@ -80,7 +89,6 @@
                         </a>
                     </div>
     
-                    <!-- Add booking button here -->
                    
                 </div>
             </div>

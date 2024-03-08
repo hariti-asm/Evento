@@ -32,6 +32,8 @@ class EventRequest extends FormRequest
         'reservation_type' => 'required',
         'user_id' => 'required',
         'image' => 'required', 
+        'price'=>'required|integer',
+        
     ];
 }
 

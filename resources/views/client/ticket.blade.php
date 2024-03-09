@@ -10,6 +10,8 @@
     <script src="jquery-3.7.1.min.js"></script>
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body>
  
@@ -85,7 +87,17 @@
 </div>
 </div>
 </div> 
-<button >Send Ticket by Email</button>
-
+@if ($event->reservation_type === 'manual')
+    <div class="text-white text-center">
+        Your ticket is ready. Please wait for manual validation by the organizer.
+    </div>
+@else
+    <button onclick="sendByEmail()">Send Ticket by Email</button>
+@endif
+<script>
+    function sendByEmail() {
+        alert("Ticket sent by email!");
+    }
+</script>
 </body>
 </html>

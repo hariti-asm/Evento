@@ -23,9 +23,12 @@
                         <input type="hidden" name="event_id" value="{{ $event->id }}">
                         <input type="hidden" name="ticket_quantity" value="1"> 
                     
-                        <button type="submit" class="mt-5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            Book Now
-                        </button>
+                        <button type="submit" class="mt-5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline 
+                        {{ \Carbon\Carbon::parse($event->date_time)->isPast() ? 'disabled cursor-not-allowed bg-blue-200' : '' }}">
+                        Book Now
+                    </button>
+                    
+
                     </form>
                     
                     <div class="flex flex-col">

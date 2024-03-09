@@ -137,7 +137,6 @@
     </div>
     @foreach($events as $event)
     <div id="editeventModal{{ $event->id }}" class="modal fixed inset-0 overflow-y-auto hidden" tabindex="-1" aria-labelledby="editeventModalLabel{{ $event->id }}" aria-hidden="true" data-modal-target="editeventModal{{ $event->id }}">
-        <!-- Modal dialog -->
         <div class="modal-dialog flex items-center justify-center min-h-screen">
             <div class="modal-content bg-white rounded-lg shadow-lg max-w-md w-full">
                 <div class="modal-header flex justify-between bg-gray-100 py-2 px-4">
@@ -145,10 +144,11 @@
                     <button type="button" class="btn-close" data-modal-hide="editeventModal{{ $event->id }}" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body p-4">
-                    <!-- Form for editing an event -->
                     <form action="{{ route('organiser.events.update', $event->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+                        <input type="hidden" name="user_id" id="user_id" value="{{ Auth::id() }}">
+
                         <div class="form-group">
                             <label for="title" class="font-semibold">Event Title:</label>
                             <input type="text" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="title" name="title" value="{{ $event->title }}" required>
@@ -157,6 +157,31 @@
                             <label for="description" class="font-semibold">Event Description:</label>
                             <textarea class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="description" name="description" required>{{ $event->description }}</textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="category" class="font-semibold">Event Category:</label>
+                            <select class="form-select border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="category" name="category_id" required>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" {{ $category->id == $event->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="price" class="font-semibold">Event Price:</label>
+                            <input type="number" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="price" name="price" value="{{ $event->price }}" required>
+                        </div>
+                    <div class="form-group">
+                            <label for="available_seats" class="font-semibold">Available Seats:</label>
+                            <input type="number" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="available_seats" name="available_seats" value="{{ $event->available_seats }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location" class="font-semibold">Event Location:</label>
+                            <input type="text" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="location" name="location" value="{{ $event->location }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_time" class="font-semibold">Event Date and Time:</label>
+                            <input type="datetime-local" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="date_time" name="date_time" value="{{ date('Y-m-d\TH:i', strtotime($event->date_time)) }}" required>
+                        </div> 
                         <div class="form-group">
                             <label for="image" class="font-semibold">Event Image:</label>
                             <input type="file" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="image" name="image">
@@ -168,6 +193,7 @@
             </div>
         </div>
     </div>
+    
     @endforeach
     
     

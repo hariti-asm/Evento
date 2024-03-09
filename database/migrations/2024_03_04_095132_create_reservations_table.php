@@ -13,16 +13,15 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-           $table->foreignId('user_id')->constrained();
-           $table->foreignId('event_id')->constrained();
-           $table->boolean('validated')->nullable()->nullable();
-           $table->integer('number_of_tickets');
-           $table->integer('total_price');
-
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->boolean('validated')->nullable();
+            $table->integer('number_of_tickets');
+            $table->integer('total_price');
             $table->timestamps();
         });
-        
     }
+    
 
     /**
      * Reverse the migrations.

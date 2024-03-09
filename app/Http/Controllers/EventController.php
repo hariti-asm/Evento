@@ -77,7 +77,7 @@ class EventController extends Controller
             'number_of_tickets' => $numberOfTickets,
             'total_price' => $totalPrice,
         ]);
-
+// if($event->reservation_type=='manual')
         return redirect()->route('ticket', compact('event'));
     }
 

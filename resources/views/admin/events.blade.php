@@ -23,7 +23,7 @@
 
 </head>
 <body >
-    <x-section></x-section>
+    {{-- <x-section></x-section> --}}
   
  
  

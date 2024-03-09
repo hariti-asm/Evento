@@ -10,7 +10,6 @@
 
 </head>
 <body>
- <!-- Hero Section -->
 <section class="bg-indigo-600 text-white py-20 px-4">
     <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <div class="md:w-1/2 mb-10 md:mb-0">
@@ -18,20 +17,28 @@
             <p class="text-xl mb-4">We offer a range of services to help you achieve your goals.</p>
             <button class="bg-white text-indigo-600 font-bold py-3 px-6 rounded hover:bg-indigo-600 hover:text-white">Get Started</button>
         </div>
-        <div class="md:w-1/2">
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+
+            <button type="submit" class="bg-white px-3 py-2 underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                {{ __('Log Out') }}
+            </button>
+            
+        </form>
+        <div class="md:w-1/2 ">
             <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713" alt="Hero Image" class="w-full rounded-xl">
         </div>
     </div>
 </section>
-    <form action="{{ route('filter.events') }}" method="GET" class="flex flex-col md:flex-row gap-3">
-        <select id="category" name="category" class="w-full h-10 border-2 border-green-400 focus:outline-none focus:border-green-400 text-green-400 rounded px-2 md:px-3 py-0 md:py-1 tracking-wider">
+    <form action="{{ route('filter.events') }}" method="GET" class="flex flex-col w-full max-w-[50%] mx-auto md:flex-row gap-3 mt-8">
+        <select id="category" name="category" class="w-full h-10 border-2 border-blue-500 focus:outline-none focus:border-blue-600 text-blue-600 rounded px-2 md:px-3 py-0 md:py-1 tracking-wider">
             <option value="All" selected>All</option>
             @foreach($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
         </select>
-        <input type="text" id="title" name="title" placeholder="Search by title" class="w-full h-10 border-2 border-green-400 focus:outline-none focus:border-green-400 text-green-400 rounded px-2 md:px-3 py-0 md:py-1 tracking-wider">
-        <button type="submit" class="bg-green-400 text-white rounded-r px-2 md:px-3 py-0 md:py-1">Filter</button>
+        <input type="text" id="title" name="title" placeholder="Search by title" class="w-full h-10 border-2 border-blue-600 focus:outline-none focus:border-blue-600 text-blue-600 rounded px-2 md:px-3 py-0 md:py-1 tracking-wider">
+        <button type="submit" class="bg-blue-600 text-white rounded-r px-2 md:px-3 py-0 md:py-1">Filter</button>
 
     </form>
     
